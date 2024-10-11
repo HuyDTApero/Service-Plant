@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Service Plant</string>
+    <string name="permission_read_media_images_rationale">Need permission\n</string>
+    <string name="permission_read_external_storage_rationale">ABC</string>
+</resources>
