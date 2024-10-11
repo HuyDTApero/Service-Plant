@@ -38,6 +38,10 @@ class GalleryActivity : AppCompatActivity() {
             insets
         }
 
+        adapter.onClick= {
+            viewmodel.setCurrentImage(it)
+        }
+
         binding.rcvImage.apply {
             adapter = this@GalleryActivity.adapter
             layoutManager =

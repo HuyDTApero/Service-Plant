@@ -41,9 +41,15 @@ class GalleryAdapter : RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(differ.currentList[position])
+        val imageUri = differ.currentList[position]
+        holder.bind(imageUri)
+        holder.itemView.setOnClickListener {
+            onClick?.invoke(imageUri)
+        }
     }
 
     override fun getItemCount(): Int = differ.currentList.size
+
+    var onClick: ((Uri) -> Unit)? = {}
 
 }

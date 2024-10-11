@@ -16,10 +16,15 @@ class GalleryViewmodel @Inject constructor(
 ) : ViewModel() {
     private val _listImage : MutableStateFlow<List<Uri>> = MutableStateFlow(emptyList())
             val listImage : StateFlow<List<Uri>> = _listImage
+    private var currentImage : Uri? = null
 
     init {
         viewModelScope.launch {
             _listImage.value = imageRepository.getAllImages()
         }
     }
+    fun setCurrentImage(uri : Uri){
+        currentImage = uri
+    }
+    fun getCurrentImage() = currentImage
 }
