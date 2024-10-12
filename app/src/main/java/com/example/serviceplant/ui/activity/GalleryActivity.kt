@@ -38,9 +38,8 @@ class GalleryActivity : AppCompatActivity() {
             insets
         }
 
-        adapter.onClick= {
-            viewmodel.setCurrentImage(it)
-        }
+        handleClickListener()
+        handleObserver()
 
         binding.rcvImage.apply {
             adapter = this@GalleryActivity.adapter
@@ -52,15 +51,24 @@ class GalleryActivity : AppCompatActivity() {
                     false
                 )
         }
+    }
 
-
-
+    private fun handleObserver() {
         lifecycleScope.launch {
             viewmodel.listImage
                 .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
                 .collectLatest {
                     adapter.differ.submitList(it)
                 }
+        }
+    }
+
+    private fun handleClickListener() {
+        adapter.onClick= {
+            viewmodel.setCurrentImage(it)
+        }
+        binding.tvNext.setOnClickListener {
+
         }
     }
 
