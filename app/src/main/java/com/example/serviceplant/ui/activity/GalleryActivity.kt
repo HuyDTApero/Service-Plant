@@ -1,8 +1,10 @@
 package com.example.serviceplant.ui.activity
 
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.ViewCompat
@@ -24,9 +26,10 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class GalleryActivity : AppCompatActivity() {
-    private val viewmodel: GalleryViewmodel by viewModels()
+    private val viewModel: GalleryViewmodel by viewModels()
     private lateinit var binding: ActivityGalleryBinding
     private val adapter by lazy { GalleryAdapter() }
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -55,7 +58,7 @@ class GalleryActivity : AppCompatActivity() {
 
     private fun handleObserver() {
         lifecycleScope.launch {
-            viewmodel.listImage
+            viewModel.listImage
                 .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
                 .collectLatest {
                     adapter.differ.submitList(it)
@@ -63,12 +66,13 @@ class GalleryActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun handleClickListener() {
         adapter.onClick= {
-            viewmodel.setCurrentImage(it)
+            viewModel.setCurrentImage(it)
         }
         binding.tvNext.setOnClickListener {
-
+            viewModel.identifyPlant("ABC", "ABC", "ABC")
         }
     }
 

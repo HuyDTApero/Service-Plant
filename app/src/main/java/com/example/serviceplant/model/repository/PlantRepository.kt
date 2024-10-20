@@ -7,6 +7,7 @@ import com.example.serviceplant.R
 import com.example.serviceplant.model.api.PlantIdentificationApi
 import com.example.serviceplant.model.data.remote.PlantResponse
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import java.security.KeyFactory
 import java.security.spec.X509EncodedKeySpec
